@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   description: 'Experienced React and Next.js developer with 6+ years of expertise in building modern web applications',
   keywords: 'React, Next.js, JavaScript, TypeScript, Frontend Developer, Web Developer',
   authors: [{ name: 'Senthilkannan' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', type: 'image/x-icon' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 }
 
 export const viewport: Viewport = {
@@ -23,6 +31,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+      </head>
       <body className={inter.className}>
         {children}
       </body>
