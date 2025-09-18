@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Github, 
@@ -15,9 +15,45 @@ import {
   Menu,
   X
 } from 'lucide-react'
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const webhookUrl = 'https://n8n.techkanna.com/webhook/c8973ea3-9f48-4328-be57-9e095e42964e/chat'
+		createChat({
+      webhookUrl,
+      webhookConfig: {
+        method: 'POST',
+        headers: {}
+      },
+      target: '#n8n-chat',
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      loadPreviousSession: true,
+      metadata: {},
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [
+        'Hi there! 👋',
+        'My name is Senthilkannan. How can I assist you today?'
+      ],
+      i18n: {
+        en: {
+          title: 'Hi there! 👋',
+          subtitle: "Start a chat. We're here to help you 24/7.",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your question..',
+          closeButtonTooltip: ''
+        },
+      },
+      enableStreaming: true,
+    });
+	}, []);
 
 
   const toggleMobileMenu = () => {
@@ -30,8 +66,7 @@ export default function Home() {
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
+    animate: { opacity: 1, y: 0 }
   }
 
   const staggerChildren = {
@@ -57,7 +92,7 @@ export default function Home() {
     {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration. Features include real-time inventory, user authentication, and admin dashboard.',
-      tech: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
+      tech: ['Tailwind CSS', 'Next.js', 'TypeScript', 'Razorpay', 'PostgreSQL', 'Redis', 'Docker', 'proxmox'],
       image: '🛒',
       link: '#',
       github: '#'
@@ -65,7 +100,7 @@ export default function Home() {
     {
       title: 'AI-Powered Job Practice Platform',
       description: 'Intelligent resume analysis and job practice platform powered by fully local LLM with plan-based AI reasoning. Features include resume optimization, interview simulation, and personalized career guidance.',
-      tech: ['Next.js', 'Python', 'Ollama', 'LangChain', 'PostgreSQL', 'Drizzle'],
+      tech: ['Next.js', 'Python', 'Ollama', 'PostgreSQL', 'Drizzle', 'Docker', 'proxmox'],
       image: '🤖',
       link: '#',
       github: '#'
@@ -73,7 +108,7 @@ export default function Home() {
     {
       title: 'AI Agents Platform with n8n',
       description: 'Scalable AI chatbot platform built with n8n workflow automation, deployed on Proxmox with Ollama for local LLM processing. Features customizable workflows, easy scaling, and Cloudflare integration for global performance.',
-      tech: ['n8n', 'Ollama', 'Proxmox', 'Cloudflare', 'Docker', 'Node.js'],
+      tech: ['n8n', 'Ollama', 'Proxmox', 'Cloudflare', 'Docker'],
       image: '🤖',
       link: '#',
       github: '#'
@@ -82,25 +117,32 @@ export default function Home() {
 
   const experience = [
     {
-      company: 'TechCorp Solutions',
-      position: 'Senior Frontend Developer',
-      duration: '2021 - Present',
-      location: 'San Francisco, CA',
-      description: 'Lead frontend development for enterprise applications, mentor junior developers, and architect scalable React applications.'
+      company: 'Techdew UX Design Pvt. Ltd.',
+      position: 'Lead UI Engineer',
+      duration: 'Mar 2023 - Present',
+      location: 'Thoothukudi',
+      description: 'Lead and managed multiple React.js projects from initiation to deployment, producing detailed project plans, schedules and risk mitigation strategies. Coordinated cross-functional teams (design, backend, QA) ensuring alignment on scope, timelines and quality standards. Implemented Agile Scrum process, facilitating sprint planning, daily stand-ups, reviews and retrospectives. Architected and developed full-stack solutions with React.js, Next.js and Node.js, achieving 30% performance improvements. Mentored 10+ junior developers, fostering growth in React.js and best coding practices.'
     },
     {
-      company: 'StartupXYZ',
-      position: 'Full-Stack Developer',
-      duration: '2019 - 2021',
-      location: 'Remote',
-      description: 'Built and maintained multiple web applications using React, Next.js, and Node.js. Collaborated with cross-functional teams to deliver high-quality products.'
+      company: 'Techdew UX Design Pvt. Ltd.',
+      position: 'Senior UI Engineer',
+      duration: 'Mar 2022 - Mar 2023',
+      location: 'Thoothukudi',
+      description: 'Designed and developed responsive and high-performance user interfaces. Collaborated closely with clients and team members to understand requirements.'
     },
     {
-      company: 'WebDev Agency',
-      position: 'React Developer',
-      duration: '2018 - 2019',
-      location: 'New York, NY',
-      description: 'Developed custom web applications for various clients, focusing on performance optimization and user experience.'
+      company: 'Techdew UX Design Pvt. Ltd.',
+      position: 'UI Engineer',
+      duration: 'Sep 2020 - Mar 2022',
+      location: 'Thoothukudi',
+      description: 'Developed and maintained frontend components for web applications. Participated in code reviews and contributed to best practices.'
+    },
+    {
+      company: 'Techdew UX Design Pvt. Ltd.',
+      position: 'UI Engineer Trainee',
+      duration: 'Sep 2019 - Sep 2020',
+      location: 'Chennai',
+      description: 'Learned and applied modern web development technologies. Created pixel-perfect, user-friendly web applications.'
     }
   ]
 
@@ -182,6 +224,7 @@ export default function Home() {
             <motion.h1
               className="text-5xl md:text-7xl font-bold mb-6"
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
             >
               <span className="gradient-text">Lead React</span>
               <br />
@@ -190,12 +233,14 @@ export default function Home() {
             <motion.p
               className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
             >
               Building exceptional web experiences with 6+ years of expertise in React, Next.js, and modern frontend technologies
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
             >
               <a
                 href="#contact"
@@ -443,7 +488,7 @@ export default function Home() {
             
             <div className="flex gap-4">
               <motion.a
-                href="https://github.com"
+                href="https://github.com/techkanna"
                 className="p-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors duration-200"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -451,7 +496,7 @@ export default function Home() {
                 <Github className="w-6 h-6" />
               </motion.a>
               <motion.a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/techkanna"
                 className="p-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors duration-200"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
