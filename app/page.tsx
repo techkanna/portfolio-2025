@@ -38,7 +38,7 @@ export default function Home() {
       showWelcomeScreen: false,
       defaultLanguage: 'en',
       initialMessages: [
-        'Hi, I’m Senthilkannan’s AI assistant, answering on his behalf. I’ll speak in first person to keep things natural. I can walk you through his projects, skills, and journey as a full stack web developer. What would you like to check out first?',
+        `Hi, I'm Senthilkannan's AI assistant, answering on his behalf. I'll speak in first person to keep things natural. I can walk you through his projects, skills, and journey as a full stack web developer. What would you like to check out first?`,
       ],
       i18n: {
         en: {
@@ -52,6 +52,55 @@ export default function Home() {
       },
       enableStreaming: true,
     });
+
+    // Track n8n chat button clicks with Umami
+    const trackChatButtonClick = () => {
+      // Track with Umami analytics
+      if (typeof window !== 'undefined' && (window as any).umami) {
+        (window as any).umami.track('chat-button-click', {
+          event_category: 'engagement',
+          event_label: 'n8n-chat-widget',
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      // Also log to console for debugging
+      console.info('n8n Chat button clicked - tracked with Umami');
+    };
+
+    let eventListenerAttached = false;
+    // Wait for n8n chat to be fully loaded and find the chat button
+    const setupChatButtonTracking = () => {
+
+      const attachEventListener = (button: HTMLElement) => {
+        if (!eventListenerAttached) {
+          button.addEventListener('click', trackChatButtonClick);
+          eventListenerAttached = true;
+          console.info('Chat button event listener attached');
+        }
+      };
+
+      const findChatButton = (): HTMLElement | null => {
+        // Use the specific class name for n8n chat toggle button
+        const button: HTMLElement | null = document.querySelector('.chat-window-toggle');
+        if (button) {
+          console.info('Found n8n chat button');
+          return button;
+        }
+        return null;
+      };
+
+      // Try to find the button immediately
+      const chatButton = findChatButton();
+      
+      if (chatButton) {
+        attachEventListener(chatButton);
+      }
+    };
+
+    // Setup tracking after a short delay to ensure n8n chat is loaded
+    setTimeout(setupChatButtonTracking, 2000);
   }, []);
 
 
