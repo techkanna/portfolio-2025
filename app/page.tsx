@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink, 
-  Code, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Code,
   Award,
   Users,
   Calendar,
@@ -23,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     const webhookUrl = 'https://n8n.techkanna.com/webhook/c8973ea3-9f48-4328-be57-9e095e42964e/chat'
-		createChat({
+    createChat({
       webhookUrl,
       webhookConfig: {
         method: 'POST',
@@ -38,8 +38,7 @@ export default function Home() {
       showWelcomeScreen: false,
       defaultLanguage: 'en',
       initialMessages: [
-        'Hi there! 👋',
-        'My name is Senthilkannan. How can I assist you today?'
+        'Hi, I’m Senthilkannan’s AI assistant, answering on his behalf. I’ll speak in first person to keep things natural. I can walk you through his projects, skills, and journey as a full stack web developer. What would you like to check out first?',
       ],
       i18n: {
         en: {
@@ -53,7 +52,7 @@ export default function Home() {
       },
       enableStreaming: true,
     });
-	}, []);
+  }, []);
 
 
   const toggleMobileMenu = () => {
@@ -80,12 +79,12 @@ export default function Home() {
   const skills = [
     { name: 'React', level: 95, icon: '⚛️' },
     { name: 'Next.js', level: 95, icon: '▲' },
-    { name: 'TypeScript', level: 90, icon: '🔷' },
     { name: 'JavaScript', level: 98, icon: '🟨' },
     { name: 'Tailwind CSS', level: 90, icon: '🎨' },
     { name: 'Storybook', level: 85, icon: '📚' },
     { name: 'PostgreSQL', level: 75, icon: '🐘' },
     { name: 'Docker', level: 80, icon: '🐳' },
+    { name: 'AI Integration', level: 85, icon: '🤖' }
   ]
 
   const projects = [
@@ -118,31 +117,55 @@ export default function Home() {
   const experience = [
     {
       company: 'Techdew UX Design Pvt. Ltd.',
-      position: 'Lead UI Engineer',
+      position: 'Lead UI Engineer - React.js / Next.js',
       duration: 'Mar 2023 - Present',
       location: 'Thoothukudi',
-      description: 'Lead and managed multiple React.js projects from initiation to deployment, producing detailed project plans, schedules and risk mitigation strategies. Coordinated cross-functional teams (design, backend, QA) ensuring alignment on scope, timelines and quality standards. Implemented Agile Scrum process, facilitating sprint planning, daily stand-ups, reviews and retrospectives. Architected and developed full-stack solutions with React.js, Next.js and Node.js, achieving 30% performance improvements. Mentored 10+ junior developers, fostering growth in React.js and best coding practices.'
+      achievements: [
+        'Led and managed multiple React.js projects from initiation to deployment',
+        'Showcased internal full-stack & AI POCs (Next.js, n8n, PostgreSQL, OpenAI/Ollama API, Docker, Proxmox), exploring modern architectures and integrations.',
+        'Set up CI/CD pipelines (GitHub Actions, Docker, Proxmox) for personal demos.',
+        'Produced detailed project plans, schedules and risk mitigation strategies',
+        'Coordinated cross-functional teams (design, backend, QA) ensuring alignment',
+        'Implemented Agile Scrum process with sprint planning and retrospectives',
+        'Architected full-stack solutions achieving 30% performance improvements',
+        'Mentored 10+ junior developers in React.js and best coding practices'
+      ]
     },
     {
       company: 'Techdew UX Design Pvt. Ltd.',
       position: 'Senior UI Engineer',
       duration: 'Mar 2022 - Mar 2023',
       location: 'Thoothukudi',
-      description: 'Designed and developed responsive and high-performance user interfaces. Collaborated closely with clients and team members to understand requirements.'
+      achievements: [
+        'Designed and developed responsive, high-performance user interfaces',
+        'Collaborated closely with clients and team members on requirements',
+        'Optimized frontend performance and user experience metrics',
+        'Implemented modern UI/UX patterns and design systems'
+      ]
     },
     {
       company: 'Techdew UX Design Pvt. Ltd.',
       position: 'UI Engineer',
       duration: 'Sep 2020 - Mar 2022',
       location: 'Thoothukudi',
-      description: 'Developed and maintained frontend components for web applications. Participated in code reviews and contributed to best practices.'
+      achievements: [
+        'Developed and maintained reusable frontend components',
+        'Participated in code reviews and contributed to best practices',
+        'Built responsive web applications with modern frameworks',
+        'Collaborated with design team to implement pixel-perfect interfaces'
+      ]
     },
     {
       company: 'Techdew UX Design Pvt. Ltd.',
       position: 'UI Engineer Trainee',
       duration: 'Sep 2019 - Sep 2020',
       location: 'Chennai',
-      description: 'Learned and applied modern web development technologies. Created pixel-perfect, user-friendly web applications.'
+      achievements: [
+        'Learned and applied modern web development technologies',
+        'Created pixel-perfect, user-friendly web applications',
+        'Gained hands-on experience with React.js and frontend frameworks',
+        'Developed strong foundation in HTML, CSS, and JavaScript'
+      ]
     }
   ]
 
@@ -152,7 +175,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <motion.div 
+            <motion.div
               className="text-2xl font-bold gradient-text"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -160,7 +183,7 @@ export default function Home() {
             >
               Senthilkannan
             </motion.div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
@@ -222,13 +245,13 @@ export default function Home() {
             variants={staggerChildren}
           >
             <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6"
+              className="text-4xl md:text-6xl font-bold mb-6"
               variants={fadeInUp}
               transition={{ duration: 0.6 }}
             >
-              <span className="gradient-text">Lead React</span>
-              <br />
-              <span className="text-white">Developer</span>
+              <span className="text-white">UI Engineer by <span className="gradient-text"> Profession</span>
+                <br />
+                Full Stack Developer by <span className="gradient-text"> Passion</span></span>
             </motion.h1>
             <motion.p
               className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
@@ -270,13 +293,17 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">About Me</h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              I'm a passionate frontend developer with over 6 years of experience building scalable, 
-              performant web applications. I specialize in React, Next.js, and TypeScript, with a 
-              strong focus on user experience and modern development practices.
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto text-left">
+              I’m a UI Engineer with 6+ years of experience building scalable, high-performance user interfaces with React.js and Next.js. Over time, I’ve expanded my skillset beyond frontend to include backend development, database design, DevOps, and AI integration.
+              <br />
+              <br />
+              While my professional work has focused on frontend leadership, I have built and showcased multiple proof-of-concepts (POCs) in full-stack and AI-driven applications, gaining practical hands-on experience in Node.js, PostgreSQL, Docker, Proxmox, and AI APIs.
+              <br />
+              <br />
+              My goal is to bridge my strong frontend expertise with full-stack problem solving, delivering end-to-end solutions that are scalable, modern, and AI-ready.
             </p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { icon: <Code className="w-8 h-8" />, title: 'Clean Code', desc: 'Writing maintainable, scalable code' },
@@ -451,7 +478,14 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-300">{job.description}</p>
+                <ul className="text-gray-300 space-y-2">
+                  {job.achievements.map((achievement, achievementIndex) => (
+                    <li key={achievementIndex} className="flex items-start">
+                      <span className="text-primary-400 mr-3 mt-1">•</span>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
@@ -470,7 +504,7 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              I'm always interested in new opportunities and exciting projects. 
+              I'm always interested in new opportunities and exciting projects.
               Let's discuss how we can bring your ideas to life.
             </p>
           </motion.div>
@@ -485,7 +519,7 @@ export default function Home() {
               <Mail className="w-5 h-5" />
               Get In Touch
             </motion.a>
-            
+
             <div className="flex gap-4">
               <motion.a
                 href="https://github.com/techkanna"
