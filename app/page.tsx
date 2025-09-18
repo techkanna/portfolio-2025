@@ -21,6 +21,26 @@ import { createChat } from '@n8n/chat';
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  // Universal CTA tracking function
+  const trackCTAClick = (ctaName: string, ctaType: string, additionalData: Record<string, any> = {}) => {
+    const eventData = {
+      event_category: 'cta_click',
+      event_label: ctaName,
+      cta_type: ctaType,
+      page_url: typeof window !== 'undefined' ? window.location.href : 'unknown',
+      timestamp: new Date().toISOString(),
+      ...additionalData
+    };
+
+    // Track with Umami analytics
+    if (typeof window !== 'undefined' && (window as any).umami) {
+      (window as any).umami.track('cta-click', eventData);
+    }
+    
+    // Log to console for debugging
+    console.info(`CTA clicked: ${ctaName} (${ctaType})`, eventData);
+  };
+
   useEffect(() => {
     const webhookUrl = 'https://n8n.techkanna.com/webhook/c8973ea3-9f48-4328-be57-9e095e42964e/chat'
     createChat({
@@ -55,18 +75,9 @@ export default function Home() {
 
     // Track n8n chat button clicks with Umami
     const trackChatButtonClick = () => {
-      // Track with Umami analytics
-      if (typeof window !== 'undefined' && (window as any).umami) {
-        (window as any).umami.track('chat-button-click', {
-          event_category: 'engagement',
-          event_label: 'n8n-chat-widget',
-          page_url: window.location.href,
-          timestamp: new Date().toISOString()
-        });
-      }
-      
-      // Also log to console for debugging
-      console.info('n8n Chat button clicked - tracked with Umami');
+      trackCTAClick('chat-button', 'chat-widget', {
+        widget_type: 'n8n-chat'
+      });
     };
 
     let eventListenerAttached = false;
@@ -105,6 +116,10 @@ export default function Home() {
 
 
   const toggleMobileMenu = () => {
+    trackCTAClick('mobile-menu-toggle', 'navigation', {
+      action: isMobileMenuOpen ? 'close' : 'open',
+      location: 'mobile-nav'
+    });
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
@@ -240,6 +255,10 @@ export default function Home() {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   className="text-gray-300 hover:text-white transition-colors duration-200"
+                  onClick={() => trackCTAClick(`nav-${item.toLowerCase()}`, 'navigation', {
+                    section: item.toLowerCase(),
+                    location: 'desktop-nav'
+                  })}
                 >
                   {item}
                 </a>
@@ -271,7 +290,13 @@ export default function Home() {
                     <a
                       key={item}
                       href={`#${item.toLowerCase()}`}
-                      onClick={closeMobileMenu}
+                      onClick={() => {
+                        trackCTAClick(`nav-${item.toLowerCase()}`, 'navigation', {
+                          section: item.toLowerCase(),
+                          location: 'mobile-nav'
+                        });
+                        closeMobileMenu();
+                      }}
                       className="block text-gray-300 hover:text-white transition-colors duration-200 py-2"
                     >
                       {item}
@@ -317,12 +342,22 @@ export default function Home() {
               <a
                 href="#contact"
                 className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+                onClick={() => trackCTAClick('get-in-touch', 'hero-cta', {
+                  section: 'hero',
+                  target: 'contact',
+                  style: 'primary'
+                })}
               >
                 Get In Touch
               </a>
               <a
                 href="#projects"
                 className="border border-primary-600 text-primary-400 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+                onClick={() => trackCTAClick('view-my-work', 'hero-cta', {
+                  section: 'hero',
+                  target: 'projects',
+                  style: 'secondary'
+                })}
               >
                 View My Work
               </a>
@@ -466,6 +501,12 @@ export default function Home() {
                     <a
                       href={project.github}
                       className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                      onClick={() => trackCTAClick('project-github', 'project-cta', {
+                        project_title: project.title,
+                        project_index: index,
+                        action: 'view_code',
+                        platform: 'github'
+                      })}
                     >
                       <Github className="w-4 h-4" />
                       Code
@@ -473,6 +514,12 @@ export default function Home() {
                     <a
                       href={project.link}
                       className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                      onClick={() => trackCTAClick('project-demo', 'project-cta', {
+                        project_title: project.title,
+                        project_index: index,
+                        action: 'view_demo',
+                        platform: 'external'
+                      })}
                     >
                       <ExternalLink className="w-4 h-4" />
                       Live Demo
@@ -564,6 +611,12 @@ export default function Home() {
               className="flex items-center gap-3 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => trackCTAClick('contact-email', 'contact-cta', {
+                section: 'contact',
+                action: 'send_email',
+                platform: 'email',
+                email: 'contact@techkanna.com'
+              })}
             >
               <Mail className="w-5 h-5" />
               Get In Touch
@@ -575,6 +628,12 @@ export default function Home() {
                 className="p-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors duration-200"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => trackCTAClick('contact-github', 'contact-cta', {
+                  section: 'contact',
+                  action: 'visit_profile',
+                  platform: 'github',
+                  url: 'https://github.com/techkanna'
+                })}
               >
                 <Github className="w-6 h-6" />
               </motion.a>
@@ -583,6 +642,12 @@ export default function Home() {
                 className="p-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors duration-200"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => trackCTAClick('contact-linkedin', 'contact-cta', {
+                  section: 'contact',
+                  action: 'visit_profile',
+                  platform: 'linkedin',
+                  url: 'https://www.linkedin.com/in/techkanna'
+                })}
               >
                 <Linkedin className="w-6 h-6" />
               </motion.a>
