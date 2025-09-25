@@ -21,6 +21,10 @@ body {
   scroll-behavior: smooth;
 }
 
+section{
+  scroll-margin-top: 1rem;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
