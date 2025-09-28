@@ -11,6 +11,7 @@ import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Infrastructure from './components/InfrastructureOverview';
 import { useChatbot } from './hooks/useChatbot';
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <About />
       <Projects />
       <Skills />
+      <Infrastructure />
       <Experience />
       <Contact />
       <Footer />
