@@ -1,12 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { trackCTAClick } from '../services/analytics'
 
-interface HeroProps {
-  trackCTAClick: (ctaName: string, ctaType: string, additionalData?: Record<string, any>) => void
-}
 
-export default function Hero({ trackCTAClick }: HeroProps) {
+export default function Hero() {
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 }
@@ -53,22 +51,22 @@ export default function Hero({ trackCTAClick }: HeroProps) {
             <a
               href="#contact"
               className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
-              onClick={() => trackCTAClick('get-in-touch', 'hero-cta', {
+              onClick={() => trackCTAClick({ctaName: 'get-in-touch', ctaType: 'hero-cta', additionalData: {
                 section: 'hero',
                 target: 'contact',
                 style: 'primary'
-              })}
+              }})}
             >
               Get In Touch
             </a>
             <a
               href="#projects"
               className="border border-primary-600 text-primary-400 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
-              onClick={() => trackCTAClick('view-my-work', 'hero-cta', {
+              onClick={() => trackCTAClick({ctaName: 'view-my-work', ctaType:'hero-cta', additionalData: {
                 section: 'hero',
                 target: 'projects',
                 style: 'secondary'
-              })}
+              }})}
             >
               View My Work
             </a>

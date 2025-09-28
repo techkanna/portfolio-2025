@@ -3,12 +3,9 @@
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { projects } from '../data/projects'
+import { trackCTAClick } from '../services/analytics'
 
-interface ProjectsProps {
-  trackCTAClick: (ctaName: string, ctaType: string, additionalData?: Record<string, any>) => void
-}
-
-export default function Projects({ trackCTAClick }: ProjectsProps) {
+export default function Projects() {
   return (
     <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8 bg-dark-800/50">
       <div className="max-w-7xl mx-auto">
@@ -53,12 +50,12 @@ export default function Projects({ trackCTAClick }: ProjectsProps) {
                   <a
                     href={project.link}
                     className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-                    onClick={() => trackCTAClick('project-demo', 'project-cta', {
+                    onClick={() => trackCTAClick({ctaName:'project-demo', ctaType: 'project-cta', additionalData: {
                       project_title: project.title,
                       project_index: index,
                       action: 'view_demo',
                       platform: 'external'
-                    })}
+                    }})}
                   >
                     <ExternalLink className="w-4 h-4" />
                     Live Demo

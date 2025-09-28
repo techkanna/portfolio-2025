@@ -4,20 +4,17 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import { trackCTAClick } from '../services/analytics'
 
-interface NavigationProps {
-  trackCTAClick: (ctaName: string, ctaType: string, additionalData?: Record<string, any>) => void
-}
-
-export default function Navigation({ trackCTAClick }: NavigationProps) {
+export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
 
   const toggleMobileMenu = () => {
-    trackCTAClick('mobile-menu-toggle', 'navigation', {
+    trackCTAClick({ctaName:'mobile-menu-toggle', ctaType: 'navigation', additionalData: {
       action: isMobileMenuOpen ? 'close' : 'open',
       location: 'mobile-nav'
-    })
+    }})
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
@@ -69,10 +66,10 @@ export default function Navigation({ trackCTAClick }: NavigationProps) {
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className="text-gray-300 hover:text-white transition-colors duration-200"
-                onClick={() => trackCTAClick(`nav-${item.toLowerCase()}`, 'navigation', {
+                onClick={() => trackCTAClick({ctaName: `nav-${item.toLowerCase()}`, ctaType:'navigation', additionalData: {
                   section: item.toLowerCase(),
                   location: 'desktop-nav'
-                })}
+                }})}
               >
                 {item}
               </a>
@@ -105,10 +102,10 @@ export default function Navigation({ trackCTAClick }: NavigationProps) {
                     key={item}
                     href={`#${item.toLowerCase()}`}
                     onClick={() => {
-                      trackCTAClick(`nav-${item.toLowerCase()}`, 'navigation', {
+                      trackCTAClick({ctaName: `nav-${item.toLowerCase()}`, ctaType: 'navigation', additionalData: {
                         section: item.toLowerCase(),
                         location: 'mobile-nav'
-                      });
+                      }});
                       closeMobileMenu();
                     }}
                     className="block text-gray-300 hover:text-white transition-colors duration-200 py-2"
