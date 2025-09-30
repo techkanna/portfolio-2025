@@ -32,7 +32,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-dark-700/50 p-6 rounded-lg text-center hover:bg-dark-700 transition-colors duration-200"
+                  className="bg-dark-700/50 p-6 rounded-lg text-center"
                 >
                   <div className="text-4xl mb-3">{skill.icon}</div>
                   <h4 className="font-semibold">{skill.name}</h4>
@@ -52,7 +52,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-dark-700/50 p-6 rounded-lg text-center hover:bg-dark-700 transition-colors duration-200"
+                  className="bg-dark-700/50 p-6 rounded-lg text-center"
                 >
                   <div className="text-4xl mb-3">{skill.icon}</div>
                   <h4 className="font-semibold">{skill.name}</h4>
@@ -72,7 +72,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-dark-700/50 p-6 rounded-lg text-center hover:bg-dark-700 transition-colors duration-200"
+                  className="bg-dark-700/50 p-6 rounded-lg text-center"
                 >
                   <div className="text-4xl mb-3">{skill.icon}</div>
                   <h4 className="font-semibold">{skill.name}</h4>
@@ -92,7 +92,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-dark-700/50 p-6 rounded-lg hover:bg-dark-700 transition-colors duration-200"
+                  className="bg-dark-700/50 p-6 rounded-lg"
                 >
                   <div className="flex items-start gap-4">
                     <div className="text-4xl flex-shrink-0">{skill.icon}</div>

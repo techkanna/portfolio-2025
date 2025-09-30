@@ -12,19 +12,19 @@ export const skills = {
     { name: "Framer Motion", icon: "🎬" },
   ],
   backendAndDevOps: [
-    { name: "Node.js", icon: "🟩" },
+    { name: "Next.js", icon: "▲" },
     { name: "FastAPI (Python)", icon: "🐍" },
     { name: "PostgreSQL", icon: "🐘" },
     { name: "Docker", icon: "🐳" },
   ],
   emerging: [
     { 
-      name: "AI Integration (Cloud Providers)", 
-      icon: "☁️🤖",
-      description: "OpenAI, Hugging Face, and other APIs for intelligent apps"
+      name: "Micro AI Deployment", 
+      icon: "⚡🤖",
+      description: "Deploying small, focused AI models where needed for efficiency"
     },
     { 
-      name: "Local LLM & Diffusers Integration (ollama)", 
+      name: "Local LLM (ollama) & Diffusers Integration", 
       icon: "🖥️🧠",
       description: "Running local Large Language Models, text-to-image & image-to-image pipelines"
     },
@@ -34,9 +34,9 @@ export const skills = {
       description: "Automation of tasks and multi-step workflows using n8n"
     },
     { 
-      name: "Micro AI Deployment", 
-      icon: "⚡🤖",
-      description: "Deploying small, focused AI models where needed for efficiency"
+      name: "AI Integration (Cloud Providers)", 
+      icon: "☁️🤖",
+      description: "OpenAI, Hugging Face, and other APIs for intelligent apps"
     },
   ],
 }

@@ -24,15 +24,22 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
+              href={project.link}
+              onClick={() => trackCTAClick({ctaName:'project-demo', ctaType: 'project-cta', additionalData: {
+                project_title: project.title,
+                project_index: index,
+                action: 'view_demo',
+                platform: 'external'
+              }})}
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-dark-700/50 rounded-lg overflow-hidden hover:bg-dark-700 transition-colors duration-200"
+              className="bg-dark-700/50 rounded-lg overflow-hidden hover:bg-dark-700 transition-colors duration-200 h-full"
             >
-              <div className="p-6">
+              <div className="p-6 h-full flex flex-col justify-between">
                 <div className="text-4xl mb-4">{project.image}</div>
                 <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
                 <p className="text-gray-300 mb-4">{project.description}</p>
@@ -47,22 +54,15 @@ export default function Projects() {
                   ))}
                 </div>
                 <div>
-                  <a
-                    href={project.link}
+                  <p
                     className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-                    onClick={() => trackCTAClick({ctaName:'project-demo', ctaType: 'project-cta', additionalData: {
-                      project_title: project.title,
-                      project_index: index,
-                      action: 'view_demo',
-                      platform: 'external'
-                    }})}
                   >
                     <ExternalLink className="w-4 h-4" />
                     Live Demo
-                  </a>
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
