@@ -49,6 +49,18 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
           >
             <a
+              href="/senthilkannan_cv.pdf"
+              target='_blank'
+              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+              onClick={() => trackCTAClick({ctaName: 'download-cv', ctaType: 'hero-cta', additionalData: {
+                section: 'hero',
+                target: 'downloadcv',
+                style: 'primary'
+              }})}
+            >
+              Download CV
+            </a>
+            <a
               href="#contact"
               className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
               onClick={() => trackCTAClick({ctaName: 'get-in-touch', ctaType: 'hero-cta', additionalData: {
