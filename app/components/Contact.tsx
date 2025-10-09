@@ -25,7 +25,7 @@ export default function Contact() {
 
         <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
           <motion.a
-            href="mailto:contact@techkanna.com"
+            href="mailto:senthilkannan@techkanna.com"
             className="flex items-center gap-3 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -33,7 +33,7 @@ export default function Contact() {
               section: 'contact',
               action: 'send_email',
               platform: 'email',
-              email: 'contact@techkanna.com'
+              email: 'senthilkannan@techkanna.com'
             }})}
           >
             <Mail className="w-5 h-5" />
